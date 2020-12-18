@@ -1,9 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); 
+const proyectosController = require ('../controllers/proyectosController');
     
-router.get('/', (req, res) => {
-    res.send("Index");
-});
+router.get('/', proyectosController.proyectosHome);
     
 router.get('/nosotros', (req, res) => {
     res.send("Nosotros");
