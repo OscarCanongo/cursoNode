@@ -1,3 +1,5 @@
 exports.proyectosHome = (req, res) => {
-    res.send("Index");
+    res.render("index", {
+        nombrePagina : 'Proyectos'
+    });
 }

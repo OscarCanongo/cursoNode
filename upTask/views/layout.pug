@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="/css/normalize.css")
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.2/css/all.css', integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr', crossorigin='anonymous')
+        link(rel="stylesheet", href="/css/app.css")
+        title #{nombrePagina}
+    body
+        header.barra
+            h1 UpTask - Administrador de Proyectos
+            a(href = "#") Cerrar Sesión
+        
+        main.contenedor
+            aside.contenedor-proyectos
+                .panel.crear-proyecto
+                    a(href="#" class="boton") Nuevo Proyecto
+                        span +
+                .panel.lista-proyectos
+                    h2 Proyectos
+                    ul#proyectos.proyectos
+                        li
+                            a(href = "#") Diseño de una tienda virtual
+                        li
+                            a(href = "#") Diseño de nuevo Blog
+                        li
+                            a(href = "#") Diseño de logotipo
+
+            block contenido
+            
+        
+
+            
+        
