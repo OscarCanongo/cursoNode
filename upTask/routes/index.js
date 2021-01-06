@@ -10,4 +10,8 @@ router.post('/nuevo-proyecto',
     body('nombre').not().isEmpty().trim().escape(),
     proyectosController.nuevoProyecto);
     
+//Listar proyecto
+router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
+
 module.exports = router;
+

@@ -3,6 +3,9 @@ const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+//helpers con algunas funciones
+const helpers = require('./helpers');
+
 //Crear la conexion a la DB
 const db = require('./config/db');
 
@@ -21,6 +24,12 @@ app.use(express.static('public'));
 
 //Habilitar Pug
 app.set('view engine', 'pug');
+
+//Pasar var dump a la aplicación
+app.use((req, res, next) => {
+    res.locals.vardump = helpers.vardump;
+    next();
+});
 
 //Crear carpeta de vistas
 app.set('views', path.join(__dirname, './views'));
