@@ -10,10 +10,10 @@ const Proyectos = db.define('proyectos', {
         autoIncrement: true
     },
     nombre: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
     },
     url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
     }
 }, {
     hooks: {
