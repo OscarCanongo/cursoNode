@@ -1,4 +1,5 @@
 const Proyectos = require('../models/Proyectos');
+const Tareas = require('../models/Tareas');
 
 exports.proyectosHome = async (req, res) => {
     const proyectos = await Proyectos.findAll();
@@ -57,12 +58,23 @@ exports.proyectoPorUrl = async (req, res, next) => {
     if (!proyecto) {
         return next();
     }
+
+    //Consultar tareas del proyecto actual
+    const tareas = await Tareas.findAll({
+        where: {
+            proyectoId: proyecto.id
+        },
+        //include: [
+          //  { model: Proyectos }
+        //]
+    });
     
     //Render a la vista
     res.render('tareas', {
         nombrePagina: 'Tareas del Proyecto',
         proyecto,
-        proyectos
+        proyectos,
+        tareas
     });
 }
 
