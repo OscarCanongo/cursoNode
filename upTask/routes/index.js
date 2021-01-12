@@ -27,5 +27,8 @@ router.delete('/proyectos/:url', proyectosController.eliminarProyecto);
 //Tareas
 router.post('/proyectos/:url', tareasController.agregarTarea);
 
+//Actualizar tarea
+router.patch('/tareas/:id', tareasController.cambiarEstadoTarea);
+
 module.exports = router;
 
