@@ -2,6 +2,10 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 //helpers con algunas funciones
 const helpers = require('./helpers');
@@ -12,6 +16,7 @@ const db = require('./config/db');
 //Importar el modelo
 require('./models/Proyectos');
 require('./models/Tareas');
+require('./models/Usuarios');
 
 db.sync()
     .then(() => console.log('Conectado al server'))
@@ -26,17 +31,30 @@ app.use(express.static('public'));
 //Habilitar Pug
 app.set('view engine', 'pug');
 
+//Habilitar bodyParser para leer datos del formulario
+app.use(bodyParser.urlencoded({extended: true}));
+
+//Agregar flash messages
+app.use(flash());
+
+app.use(cookieParser());
+
+//Session nos permite navegar entre distintas páginas sin volvernos a autenticar
+app.use(session({
+    secret: 'supersecreto',
+    resave: false,
+    saveUninitialized: false
+}));
+
 //Pasar var dump a la aplicación
 app.use((req, res, next) => {
     res.locals.vardump = helpers.vardump;
+    res.locals.mensajes = req.flash();
     next();
 });
 
 //Crear carpeta de vistas
 app.set('views', path.join(__dirname, './views'));
-
-//Habilitar bodyParser para leer datos del formulario
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', require('./routes/index'));
 
