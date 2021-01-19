@@ -64,3 +64,5 @@ app.set('views', path.join(__dirname, './views'));
 app.use('/', require('./routes/index'));
 
 app.listen(3000);
+
+require('./handlers/email');
