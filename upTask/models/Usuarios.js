@@ -35,7 +35,11 @@ const Usuarios = db.define('usuarios', {
         }
     },
     token: Sequelize.STRING,
-    expiracion: Sequelize.DATE
+    expiracion: Sequelize.DATE,
+    activo: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    }
 }, {
     hooks: {
         beforeCreate(usuario) {
