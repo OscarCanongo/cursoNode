@@ -10,7 +10,7 @@ El sitio web permite agregar tareas a cada proyecto, marcar y desmarcar las tare
 <div style="text-align: justify;">
 
 ### Tecnologías
- - <a href="https://geekytheory.com//assets/images/icons/technologies/express.png" alt="express" width="40" height="40"/> </a> Express
+ - MySQL
  - Pug
  - Sequelize
  - Express
