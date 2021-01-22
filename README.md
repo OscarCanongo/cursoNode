@@ -19,6 +19,8 @@ El sitio web permite agregar tareas a cada proyecto, marcar y desmarcar las tare
 
 ### Deploy
 
- - [UpTask Deploy](https://www.redotheweb.com/images/nodejs-mysql.png) 
+ - [UpTask Deploy](https://pacific-dusk-49748.herokuapp.com/iniciar-sesion)
+ - Usuario: admin@admin.com
+ - Contraseña: adminadmin
  
 </div>
