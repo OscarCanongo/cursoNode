@@ -10,7 +10,7 @@ El sitio web permite agregar tareas a cada proyecto, marcar y desmarcar las tare
 <div style="text-align: justify;">
 
 ### Tecnologías
- - MySQL <p align="left"> <a href="https://expressjs.com" target="_blank"> <img
+ - MySQL <a href="https://expressjs.com" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/>
  - Pug
  - Sequelize
  - Express
