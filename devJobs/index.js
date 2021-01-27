@@ -8,13 +8,19 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 require('dotenv').config({ path: 'variables.env' });
+const bodyParser = require('body-parser');
 
 const app = express();
+
+//Habilitar bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Hablitar handlebars como view
 app.engine('handlebars', 
     xphbs({
-        defaultLayout: 'layout'
+        defaultLayout: 'layout',
+        helpers: require('./helpers/handlebars')
     })
 );
 
