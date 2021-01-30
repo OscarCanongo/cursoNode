@@ -9,6 +9,7 @@ const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -38,6 +39,15 @@ app.use(session({
     saveUninitialized: false,
     store: new mongoStore({ mongooseConnection: mongoose.connection })
 }));
+
+//Alertas y flash messages
+app.use(flash());
+
+//Crear nuestro middleware
+app.use((req, res, next) => {
+    res.locals.mensajes = req.flash();
+    next();
+});
 
 app.use('/', router);
 
