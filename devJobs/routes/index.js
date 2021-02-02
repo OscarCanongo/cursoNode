@@ -8,15 +8,27 @@ const authController = require('../controllers/authController');
 router.get('/', homeController.mostrarTrabajos);
 
 //Crear vacantes
-router.get('/vacantes/nueva', vacanteController.formularioNuevaVacante);
-router.post('/vacantes/nueva', vacanteController.agregarVacante);
+router.get('/vacantes/nueva', 
+    authController.verificarUsuario,
+    vacanteController.formularioNuevaVacante
+);
+router.post('/vacantes/nueva', 
+    authController.verificarUsuario,
+    vacanteController.agregarVacante
+);
 
 //Mostar vacante
 router.get('/vacantes/:url', vacanteController.mostrarVacante);
 
 //Editar vacante
-router.get('/vacantes/editar/:url', vacanteController.formEditarVacante);
-router.post('/vacantes/editar/:url', vacanteController.editarVacante);
+router.get('/vacantes/editar/:url', 
+    authController.verificarUsuario,
+    vacanteController.formEditarVacante
+);
+router.post('/vacantes/editar/:url', 
+    authController.verificarUsuario,
+    vacanteController.editarVacante
+);
 
 //Crear cuentas
 router.get('/crear-cuenta', usuariosController.formCrearCuenta);
@@ -28,6 +40,12 @@ router.post('/crear-cuenta',
 //Autenticar usuarios
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
+
+//Panel de administracion
+router.get('/administracion', 
+    authController.verificarUsuario,
+    authController.mostrarPanel
+);
 
 module.exports = router;
 
