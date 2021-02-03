@@ -11,16 +11,19 @@ require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const passport = require('./config/passport');
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 const app = express();
 
 //Habilitar bodyParser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 
 //Hablitar handlebars como view
 app.engine('handlebars', 
     xphbs({
+        handlebars: allowInsecurePrototypeAccess(Handlebars),
         defaultLayout: 'layout',
         helpers: require('./helpers/handlebars')
     })

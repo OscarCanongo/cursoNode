@@ -47,6 +47,17 @@ router.get('/administracion',
     authController.mostrarPanel
 );
 
+//Editar perfil
+router.get('/editar-perfil',
+    authController.verificarUsuario,
+    usuariosController.formEditarPerfil
+);
+
+router.post('/editar-perfil', 
+    authController.verificarUsuario,
+    usuariosController.editarPerfil
+);
+
 module.exports = router;
 
 
