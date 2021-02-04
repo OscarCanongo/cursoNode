@@ -69,6 +69,7 @@ exports.editarPerfil = async (req, res) => {
     if (req.body.password) {
         usuario.password = req.body.password;
     }
+    console.log(usuario);
     await usuario.save();
 
     //redirect
