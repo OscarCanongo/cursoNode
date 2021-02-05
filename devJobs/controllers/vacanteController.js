@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const Vacante = require('../models/Vacantes');
+const { body, sanitizeBody, validationResult } = require('express-validator');
 
 exports.formularioNuevaVacante = (req, res) => {
     res.render('nueva-vacante', {
         nombrePagina: 'Nueva Vacante',
-        tagline: 'Llena el formulario y publica tu vacante'
+        tagline: 'Llena el formulario y publica tu vacante',
+        cerrarSesion: true,
+        nombre: req.user.nombre
     });
 }
 
@@ -50,7 +53,9 @@ exports.formEditarVacante = async (req, res, next) => {
 
     res.render('editar-vacante', {
         vacante,
-        nombrePagina: `Editar - ${vacante.titulo}`
+        nombrePagina: `Editar - ${vacante.titulo}`,
+        cerrarSesion: true,
+        nombre: req.user.nombre
     });
 }
 
@@ -65,4 +70,35 @@ exports.editarVacante = async (req, res) => {
     } );
 
     res.redirect(`/vacantes/${vacante.url}`);
+}
+
+//validar y sanitizar los campos de las nuevas vacantes
+exports.validarVacante = async (req, res, next) => {
+    //Sanitizar los campos
+    const rules = [
+        body('titulo').notEmpty().withMessage('El titulo es obligatorio').escape(),
+        body('empresa').notEmpty().withMessage('La empresa es obligatoria').escape(),
+        body('ubicacion').notEmpty().withMessage('La ubicación es obligatoria').escape(),
+        body('salario').escape(),
+        body('contrato').notEmpty().withMessage('El contrato es obligatorio').escape(),
+        body('skills').notEmpty().withMessage('Agrega minimo una habilidad').escape()
+    ];
+    await Promise.all(rules.map( validation => validation.run(req)));
+    const errores = validationResult(req);
+
+
+    if(errores){
+        //Recargar la vista con los errores
+        req.flash('error', errores.array().map(error => error.msg));
+        res.render('nueva-vacante', {
+            nombrePagina: 'Nueva vacante',
+            tagline: 'Llena el formulario y publica tu vacante',
+            cerrarSesion: true,
+            nombre: req.user.nombre,
+            mensaje: req.flash
+        });
+    }
+
+    //Siguiente middleware
+    next();
 }

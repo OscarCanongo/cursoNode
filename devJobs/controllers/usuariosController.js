@@ -56,8 +56,10 @@ exports.formIniciarSesion = (req, res) => {
 exports.formEditarPerfil = (req, res) => {
     res.render('editar-perfil', {
         nombrePagina: 'Editar perfil',
-        usuario: req.user.toObject()
-    })
+        usuario: req.user.toObject(),
+        cerrarSesion: true,
+        nombre: req.user.nombre
+    });
 }
 
 //Guardar cambios editar perfil
@@ -72,6 +74,30 @@ exports.editarPerfil = async (req, res) => {
     console.log(usuario);
     await usuario.save();
 
+    req.flash('correcto', 'Camios guardados correctamente');
     //redirect
     res.redirect('/administracion')
+}
+
+//Sanitizar y validar el formulario de editar perfiles
+exports.validarPerfil = async (req, res, next) => {
+    const rules = [
+        body('nombre').not().isEmpty().withMessage('El nombre es Obligatorio').escape(),
+        body('email').isEmail().withMessage('El email debe ser valido').escape(),
+    ];
+    await Promise.all(rules.map( validation => validation.run(req)));
+    const errores = validationResult(req);
+ 
+    if(errores.isEmpty()){
+        return next();
+    }
+    req.flash('error', errores.array().map(error => error.msg));
+    res.render('editar-perfil', {
+        nombrePagina: 'Editar perfil',
+        usuario: req.user.toObject(),
+        cerrarSesion: true,
+        nombre: req.user.nombre,
+        mensajes: req.flash()
+    });
+    return;
 }

@@ -14,6 +14,7 @@ router.get('/vacantes/nueva',
 );
 router.post('/vacantes/nueva', 
     authController.verificarUsuario,
+    vacanteController.validarVacante,
     vacanteController.agregarVacante
 );
 
@@ -27,6 +28,7 @@ router.get('/vacantes/editar/:url',
 );
 router.post('/vacantes/editar/:url', 
     authController.verificarUsuario,
+    vacanteController.validarVacante,
     vacanteController.editarVacante
 );
 
@@ -40,6 +42,12 @@ router.post('/crear-cuenta',
 //Autenticar usuarios
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
+
+//cerrar sesion
+router.get('/cerrar-sesion',
+    authController.verificarUsuario,
+    authController.cerrarSesion
+);
 
 //Panel de administracion
 router.get('/administracion', 
@@ -55,6 +63,7 @@ router.get('/editar-perfil',
 
 router.post('/editar-perfil', 
     //authController.verificarUsuario,
+    usuariosController.validarPerfil,
     usuariosController.editarPerfil
 );
 
