@@ -26,10 +26,16 @@ router.get('/vacantes/editar/:url',
     authController.verificarUsuario,
     vacanteController.formEditarVacante
 );
+
 router.post('/vacantes/editar/:url', 
     authController.verificarUsuario,
     vacanteController.validarVacante,
     vacanteController.editarVacante
+);
+
+//Eliminar vacantes
+router.delete('/vacantes/eliminar/:id',
+    vacanteController.eliminarVacante
 );
 
 //Crear cuentas
