@@ -74,6 +74,18 @@ router.post('/editar-perfil',
     usuariosController.editarPerfil
 );
 
+//Recibir mensajes de candidatos
+router.post('/vacantes/:url',
+    vacanteController.subirCV,
+    vacanteController.contactar
+);
+
+//Muesra los candidatos por vacantes
+router.get('/candidatos/:id', 
+    authController.verificarUsuario,
+    vacanteController.mostrarCandidatos
+)
+
 module.exports = router;
 
 
