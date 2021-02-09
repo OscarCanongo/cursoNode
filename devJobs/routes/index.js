@@ -69,7 +69,8 @@ router.get('/editar-perfil',
 
 router.post('/editar-perfil', 
     //authController.verificarUsuario,
-    usuariosController.validarPerfil,
+    //usuariosController.validarPerfil,
+    usuariosController.subirImagen,
     usuariosController.editarPerfil
 );
 

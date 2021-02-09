@@ -23,6 +23,9 @@ const usuariosSchema = new mongoose.Schema({
     },
     expira: {
         type: Date
+    },
+    imagen: {
+        type: String
     }
 });
 

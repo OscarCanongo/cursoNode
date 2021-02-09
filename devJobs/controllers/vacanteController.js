@@ -7,7 +7,8 @@ exports.formularioNuevaVacante = (req, res) => {
         nombrePagina: 'Nueva Vacante',
         tagline: 'Llena el formulario y publica tu vacante',
         cerrarSesion: true,
-        nombre: req.user.nombre
+        nombre: req.user.nombre,
+        imagen: req.user.imagen
     });
 }
 
@@ -30,7 +31,7 @@ exports.agregarVacante = async (req, res) => {
 
 //Muestra una vacante
 exports.mostrarVacante = async (req, res, nest) => {
-    const vacante = await Vacante.findOne({ url: req.params.url }).lean();
+    const vacante = await Vacante.findOne({ url: req.params.url }).populate('autor').lean();
 
     //Si no hay resultados
     if (!vacante) {
@@ -55,7 +56,8 @@ exports.formEditarVacante = async (req, res, next) => {
         vacante,
         nombrePagina: `Editar - ${vacante.titulo}`,
         cerrarSesion: true,
-        nombre: req.user.nombre
+        nombre: req.user.nombre,
+        imagen: req.user.imagen
     });
 }
 
@@ -75,16 +77,16 @@ exports.editarVacante = async (req, res) => {
 //validar y sanitizar los campos de las nuevas vacantes
 exports.validarVacante = async (req, res, next) => {
     //Sanitizar los campos
-    const rules = [
-        body('titulo').notEmpty().withMessage('El titulo es obligatorio').escape(),
-        body('empresa').notEmpty().withMessage('La empresa es obligatoria').escape(),
-        body('ubicacion').notEmpty().withMessage('La ubicación es obligatoria').escape(),
-        body('salario').escape(),
-        body('contrato').notEmpty().withMessage('El contrato es obligatorio').escape(),
-        body('skills').notEmpty().withMessage('Agrega minimo una habilidad').escape()
-    ];
-    await Promise.all(rules.map( validation => validation.run(req)));
-    const errores = validationResult(req);
+    //const rules = [
+      //  body('titulo').notEmpty().withMessage('El titulo es obligatorio').escape(),
+        //body('empresa').notEmpty().withMessage('La empresa es obligatoria').escape(),
+        //body('ubicacion').notEmpty().withMessage('La ubicación es obligatoria').escape(),
+        //body('salario').escape(),
+        //body('contrato').notEmpty().withMessage('El contrato es obligatorio').escape(),
+        //body('skills').notEmpty().withMessage('Agrega minimo una habilidad').escape()
+    //];
+    //await Promise.all(rules.map( validation => validation.run(req)));
+    const errores = false;
 
 
     if(errores){
