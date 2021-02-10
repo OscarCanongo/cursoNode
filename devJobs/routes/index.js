@@ -49,6 +49,14 @@ router.post('/crear-cuenta',
 router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
 router.post('/iniciar-sesion', authController.autenticarUsuario);
 
+//Reset password
+router.get('/restablecer-password', authController.formRestablecerPassword);
+router.post('/restablecer-password', authController.enviarToken);
+
+//Almacenar el la base de datos
+router.get('/restablecer-password/:token', authController.restablecerPassword);
+router.post('/restablecer-password/:token', authController.guardarPassword);
+
 //cerrar sesion
 router.get('/cerrar-sesion',
     authController.verificarUsuario,
