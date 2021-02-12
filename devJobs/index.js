@@ -11,8 +11,9 @@ require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const passport = require('./config/passport');
-const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Handlebars = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const createError = require('http-errors');
 
 const app = express();
 
@@ -55,8 +56,27 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.mensajes = req.flash();
     next();
-});
+}); 
 
 app.use('/', router);
 
-app.listen(3000);
+//404 página no existente
+app.use((req, res, next) => {
+    next(createError(404, 'No encontrado'));
+});
+
+//Administracion de los errores
+app.use((error, req, res) => {
+    res.locals.mensaje = error.message;
+    const status = error.status || 500;
+    res.locals.status = status;
+    res.render('error');
+});
+
+//Puerto del server
+const port = process.env.PORT || 4000
+
+//Arrancar server
+app.listen(port, '0.0.0.0', () => {
+    console.log(`El server esta corriendo en el puerto ${port}`);
+});

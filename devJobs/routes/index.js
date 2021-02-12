@@ -94,6 +94,9 @@ router.get('/candidatos/:id',
     vacanteController.mostrarCandidatos
 )
 
+//Buscador de vacantes
+router.post('/buscador', vacanteController.buscadorVacantes);
+
 module.exports = router;
 
 
