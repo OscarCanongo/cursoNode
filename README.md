@@ -45,7 +45,7 @@ Plataforma de empleos para desarrolladores. Los reclutadores podrán dar de alta
 
 ### Deploy
 
- - [UpTask Deploy](https://powerful-badlands-46352.herokuapp.com/)
+ - [DevJobs Deploy](https://powerful-badlands-46352.herokuapp.com/)
  - Usuario: admin@admin.com
  - Contraseña: adminadmin
  
