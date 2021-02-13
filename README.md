@@ -24,3 +24,29 @@ El sitio web permite agregar tareas a cada proyecto, marcar y desmarcar las tare
  - Contraseña: adminadmin
  
 </div>
+
+## DevJobs - Plataforma de empleo para Desarrolladores
+
+Plataforma de empleos para desarrolladores. Los reclutadores podrán dar de alta una cuenta y comenzar a publicar vacantes. Los programadores a  y cuales les interese una oferta podrán llenar una solicitud y subir su cv para ponerse en contacto con el reclutador. 
+
+<img src="https://hugorocaproyectos.js.org/images/shared/nodejs-mongodb.jpg" align="right" height="150" width="150" hspace="10">
+<div style="text-align: justify;">
+
+### Tecnologías
+ - MongoDB
+ - Handlebars
+ - Mongoose
+ - Express
+ - NodeJs
+ - Axios
+ - Webpack
+ - Multer
+ - Nodemailer
+
+### Deploy
+
+ - [UpTask Deploy](https://powerful-badlands-46352.herokuapp.com/)
+ - Usuario: admin@admin.com
+ - Contraseña: adminadmin
+ 
+</div>
