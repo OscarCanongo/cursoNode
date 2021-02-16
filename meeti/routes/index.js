@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router(); 
 
 router.get('/', (req, res) => {
-    res.send('Inicio');
+    res.render('home');
 });
 
 router.get('/crear-cuenta', (req, res) => {
-    res.send('Crear cuenta');
+    res.render('crear-cuenta');
 });
 
 module.exports = router;
