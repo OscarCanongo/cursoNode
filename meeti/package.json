@@ -4,15 +4,23 @@
   "description": "Node, PostgreSQL y EJS",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "concurrently \"npm run dev\" \"npm run watch\"",
+    "watch": "webpack -w --mode development"
   },
   "author": "Oscar Cañongo",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
+    "concurrently": "^6.0.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
